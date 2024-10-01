@@ -2,7 +2,6 @@
 import json
 import os
 
-#Criando as cidades
 class Cidades:
     def __init__(self, nome):
         self.nome = nome
@@ -24,12 +23,12 @@ class Cidades:
                 for adj in self.adjacentes
             ]
         }
-#Criando as conexoes para fazer um grafo
+
 class Adjacentes:
     def __init__(self,nome, custo):
         self.nome = nome
         self.custo = custo
-#Cadastrando a cidade
+
 def cadastrarCidade():
     nomeCid = input("Digite o nome da cidade a ser cadastrada: ")
     cidade = Cidades(nomeCid.capitalize())
@@ -49,7 +48,7 @@ def cadastrarCidade():
             os.system('cls')
 
     cidade.salvarCidade()
-#Apagar cidade
+
 def apagarCidade(cidade): 
     if len(cidadesDict) == 0:
         print("Sua lista de destinos está vazia!")
@@ -60,7 +59,7 @@ def apagarCidade(cidade):
             print('Destino não encontrado, por favor tente novamente!')
         else:
             print('{} removido com sucesso!'.format(cidade))
-#Imprimir Cidade
+
 def imprimirCidades():
     if len(cidadesDict) == 0:
         print("Sua lista de destinos está vázia!")
@@ -71,16 +70,14 @@ def imprimirCidades():
                 print("Conexão: {} á {} Km de distância.".format(adj["nome"], adj["custo"]))
             print("=-="*20)
 
-
-#Main para controlar o código
-def main():
+def manutencaoDestinos():
     controlador = True
     while controlador == True:
         print("=-="*20)
         print("1. Cadastrar Destino")
         print("2. Apagar Destino") 
         print("3. Imprimir Destinos") 
-        print("4. Sair")
+        print("4. Voltar para o menu anterior")
         print("=-="*20)
         opcao = int(input("Escolha uma opção: "))
         os.system('cls')
@@ -94,15 +91,40 @@ def main():
             imprimirCidades()
         elif opcao == 4:
             controlador = False
-#Abrindo o arquivo Json para salvar o código
+        
+    with open(nomeArquivo, 'w') as f:
+        json.dump(cidadesDict, f, indent=4)
+
+
+def main():
+    controlador = True
+    while controlador == True:
+        print("=-="*20)
+        print("1. Manutenção de Destinos")
+        print("2. Manutenção de Itens")
+        print("3. Otimização de Entregas")
+        print("4. Sair")
+        print("=-="*20)
+        opcao = int(input("Escolha uma opção: "))
+        os.system('cls')
+
+        if opcao == 1:
+            manutencaoDestinos()
+        elif opcao == 2:
+            print("EM CONSTRUÇÃO")
+        elif opcao == 3:
+            print("EM CONSTRUÇÃO")
+        elif opcao == 4:
+            controlador = False
+
 nomeArquivo = 'cidades.json'
 if os.path.exists(nomeArquivo):
     with open(nomeArquivo, 'r') as f:
         cidadesDict = json.load(f)
 else:
     cidadesDict= {}
-#Chamando a main para iniciar a aplicacao
+
 main()
-#salvando as altercoes no dicionario
+
 with open(nomeArquivo, 'w') as f:
     json.dump(cidadesDict, f, indent=4)
