@@ -48,7 +48,6 @@ class Adjacentes:
 def cadastrarCidade():
     nomeCid = input("Digite o nome da cidade a ser cadastrada: ")
     cidade = Cidades(nomeCid.capitalize())
-    os.system('cls')
     print("CADASTRE AS CIDADES VIZINHAS DE {}".format(nomeCid))
     
     while(True):
@@ -85,6 +84,26 @@ def imprimirCidades():
             for adj in cidadesDict[i]["adjacentes"]:
                 print("Conexão: {} á {} Km de distância.".format(adj["nome"], adj["custo"]))
             print("=-="*20)
+
+def cadastrarItem():
+    while(True): 
+        nomeItem = input("Digite o nome do item a ser cadastrado: ")
+        alturaItem = float(input("Digite a altura do item em metros: "))
+        larguraItem = float(input("Digite a largura do item em metros: "))
+        comprimentoItem = float(input("Digite o comprimento do item em metros: "))
+        valorItem = float(input("Digite o valor unitário do item: "))
+
+        item = Itens(nomeItem, alturaItem, larguraItem, comprimentoItem, valorItem)
+        item.salvarItem()
+
+        controle = input("Deseja cadastrar outro item? S = Sim / N = Não: \n").strip().upper()
+        if controle == 'S':
+            os.system('cls')
+            cadastrarItem()
+        else:
+            os.system('cls')
+            break
+
 
 def manutencaoDestinos():
     controlador = True
@@ -124,7 +143,7 @@ def manutencaoItens():
         os.system('cls')
 
         if opcao == 1:
-            print("EM CONSTRUÇÃO")
+            cadastrarItem()
         elif opcao == 2:
             print("EM CONSTRUÇÃO")
         elif opcao == 3:
