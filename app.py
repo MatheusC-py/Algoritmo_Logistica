@@ -111,6 +111,30 @@ def manutencaoDestinos():
     with open(nomeArquivoCidades, 'w') as f:
         json.dump(cidadesDict, f, indent=4)
 
+def manutencaoItens():
+    controlador = True
+    while controlador == True:
+        print("=-="*20)
+        print("1. Cadastrar Itens")
+        print("2. Apagar Itens")
+        print("3. Imprimir Itens")
+        print("4. Voltar para o menu anterior")
+        print("=-="*20)
+        opcao = int(input("Escolha uma opção: "))
+        os.system('cls')
+
+        if opcao == 1:
+            print("EM CONSTRUÇÃO")
+        elif opcao == 2:
+            print("EM CONSTRUÇÃO")
+        elif opcao == 3:
+            print("EM CONSTRUÇÃO")
+        elif opcao == 4:
+            controlador = False
+    
+    with open(nomeArquivoItens, 'w') as f:
+        json.dump(itensDict, f, indent=4)
+
 def main():
     controlador = True
     while controlador == True:
@@ -126,7 +150,7 @@ def main():
         if opcao == 1:
             manutencaoDestinos()
         elif opcao == 2:
-            print("EM CONSTRUÇÃO")
+            manutencaoItens()
         elif opcao == 3:
             print("EM CONSTRUÇÃO")
         elif opcao == 4:
@@ -141,9 +165,9 @@ if os.path.exists(nomeArquivoCidades):
 else:
     cidadesDict= {}
 
-if os.pathexists(nomeArquivoItens):
-    with open(nomeArquivoItens, 'r') as h:
-        itensDict = json.load(h)
+if os.path.exists(nomeArquivoItens):
+    with open(nomeArquivoItens, 'r') as f:
+        itensDict = json.load(f)
 else: 
     itensDict = {}
 
@@ -152,5 +176,5 @@ main()
 with open(nomeArquivoCidades, 'w') as f:
     json.dump(cidadesDict, f, indent=4)
 
-with open(nomeArquivoItens, 'w') as h:
+with open(nomeArquivoItens, 'w') as f:
     json.dump(itensDict, f, indent=4)
