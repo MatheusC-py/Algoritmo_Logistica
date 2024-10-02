@@ -2,6 +2,22 @@
 import json
 import os
 
+class Itens:
+    def __init__(self, nome, altura, largura, comprimento, valor):
+        self.nome = nome
+        self.altura = altura
+        self.largura = largura 
+        self.comprimento = comprimento 
+        self.valor = valor
+
+    def salvarItem(self):
+            itensDict[self.nome] = {
+                'altura' : self.altura,
+                'largura' : self.largura,
+                'comprimento' : self.comprimento,
+                'valor' : self.valor
+            }
+
 class Cidades:
     def __init__(self, nome):
         self.nome = nome
@@ -92,9 +108,8 @@ def manutencaoDestinos():
         elif opcao == 4:
             controlador = False
         
-    with open(nomeArquivo, 'w') as f:
+    with open(nomeArquivoCidades, 'w') as f:
         json.dump(cidadesDict, f, indent=4)
-
 
 def main():
     controlador = True
@@ -117,14 +132,25 @@ def main():
         elif opcao == 4:
             controlador = False
 
-nomeArquivo = 'cidades.json'
-if os.path.exists(nomeArquivo):
-    with open(nomeArquivo, 'r') as f:
+nomeArquivoItens = 'itens.json'
+nomeArquivoCidades = 'cidades.json'
+
+if os.path.exists(nomeArquivoCidades):
+    with open(nomeArquivoCidades, 'r') as f:
         cidadesDict = json.load(f)
 else:
     cidadesDict= {}
 
+if os.pathexists(nomeArquivoItens):
+    with open(nomeArquivoItens, 'r') as h:
+        itensDict = json.load(h)
+else: 
+    itensDict = {}
+
 main()
 
-with open(nomeArquivo, 'w') as f:
+with open(nomeArquivoCidades, 'w') as f:
     json.dump(cidadesDict, f, indent=4)
+
+with open(nomeArquivoItens, 'w') as h:
+    json.dump(itensDict, f, indent=4)
